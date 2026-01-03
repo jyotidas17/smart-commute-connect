@@ -1,4 +1,4 @@
-import DashboardSidebar from '@/components/DashboardSidebar';
+import DashboardSidebar, { MobileHeader } from '@/components/DashboardSidebar';
 import StatsOverview from '@/components/StatsOverview';
 import CarbonSavingsRing from '@/components/CarbonSavingsRing';
 import QuickBooking from '@/components/QuickBooking';
@@ -14,11 +14,12 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       <DashboardSidebar />
+      <MobileHeader />
       
       {/* Main Content */}
-      <main className="ml-64 min-h-screen">
-        {/* Header */}
-        <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border px-8 py-4">
+      <main className="lg:ml-64 min-h-screen">
+        {/* Header - Desktop Only */}
+        <header className="hidden lg:block sticky top-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border px-8 py-4">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-display font-bold text-foreground">Good Morning, Arjun! 🌿</h1>
@@ -42,16 +43,22 @@ const Dashboard = () => {
         </header>
 
         {/* Dashboard Content */}
-        <div className="p-8 space-y-8">
+        <div className="p-4 lg:p-8 space-y-6 lg:space-y-8">
+          {/* Mobile Greeting */}
+          <div className="lg:hidden">
+            <h1 className="text-xl font-display font-bold text-foreground">Good Morning, Arjun! 🌿</h1>
+            <p className="text-sm text-muted-foreground">Let's make your commute greener today</p>
+          </div>
+
           {/* Stats Overview */}
           <section className="animate-slide-up">
             <StatsOverview />
           </section>
 
           {/* Main Grid */}
-          <div className="grid grid-cols-12 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-6">
             {/* Left Column - Carbon Savings & Quick Booking */}
-            <div className="col-span-12 lg:col-span-4 space-y-6">
+            <div className="md:col-span-1 lg:col-span-4 space-y-4 lg:space-y-6">
               {/* Carbon Savings Card */}
               <div className="stat-card p-6 animate-slide-up" style={{ animationDelay: '100ms' }}>
                 <h3 className="font-display text-lg font-semibold text-foreground mb-4">Your Carbon Impact</h3>
@@ -76,7 +83,7 @@ const Dashboard = () => {
             </div>
 
             {/* Center Column - Upcoming Rides & Walk/Cycle */}
-            <div className="col-span-12 lg:col-span-4 space-y-6">
+            <div className="md:col-span-1 lg:col-span-4 space-y-4 lg:space-y-6">
               <div className="animate-slide-up" style={{ animationDelay: '250ms' }}>
                 <UpcomingRides />
               </div>
@@ -86,7 +93,7 @@ const Dashboard = () => {
             </div>
 
             {/* Right Column - Route Matches & Schedule */}
-            <div className="col-span-12 lg:col-span-4 space-y-6">
+            <div className="md:col-span-2 lg:col-span-4 space-y-4 lg:space-y-6">
               <div className="animate-slide-up" style={{ animationDelay: '350ms' }}>
                 <RouteMatchPreview />
               </div>
